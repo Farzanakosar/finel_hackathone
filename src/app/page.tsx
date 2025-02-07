@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Car } from "@/types/car";
 import { client } from "@/sanity/lib/client";
 import { carsQuery } from "@/sanity/lib/queries";
@@ -16,6 +16,8 @@ import {
   CardTitle,
 } from "@/components/ui/Card";
 import { urlFor } from "@/sanity/lib/image";
+import { addtocart } from "./action/actions";
+import Swal from "sweetalert2";
 
 // Client-side component
 export default function Home() {
@@ -29,6 +31,23 @@ export default function Home() {
 
     fetchCarData();
   }, []);
+
+  const handleAddtoCart = (e: React.MouseEvent, car: Car) => {
+    e.preventDefault()
+        
+    Swal.fire({
+      position: 'top-right',
+      icon: "success",
+      title: `${car.name} added to cart`,
+      showConfirmButton: false,
+      timer: 1000
+
+    })
+
+    addtocart(car);
+    
+    
+  }
 
 
   
@@ -133,6 +152,9 @@ export default function Home() {
                         <div key={car._id}>
                              <CardTitle className="w-full flex items-center justify-between">{car.name}
                              </CardTitle>
+
+                             <Link href= {`/carprodt/${car.slug.current}`}>
+                             
                          
                              <CardDescription>{car.type}</CardDescription>
                              {car.image &&(
@@ -147,16 +169,20 @@ export default function Home() {
                          <div className="flex flex-row gap-9 justify-start items-start"><p className="text-gray-500"> {car.fuelCapacity} </p>
                          <p>{car.transmission}</p> 
                           <p>{car.seatingCapacity}</p>
+                          
                           </div>
                           <p className=" pt-3 text-2xl font-bold leading-none tracking-tight">{car.pricePerDay}</p>  
                           
                           <p className=" flex items-center justify-center pt-2 text-black font-samibold">{car.tags}</p>
+                          
                           <br/>
-                          <Link href={"/detailPage"}>
-                <button className="flex justify-center items-center  bg-[#3563e9] p-2 text-white rounded-md">
+                          
+                <button className="flex justify-center items-center  bg-[#3563e9] p-2 text-white rounded-md" onClick={(e) => handleAddtoCart(e, car)}>
                   Rent Now
                 </button>
+              
               </Link>
+
                         </div>
               )
                 
@@ -166,7 +192,7 @@ export default function Home() {
         
       </section>
 
-      {/* Recommendation car */}
+      Recommendation car 
       <section id="block4" className="popular w-full flex flex-col gap-4">
         <h1 className="text-gray-500 text-lg sm:text-xl">Recommendation Car</h1>
         <div className="sec grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">

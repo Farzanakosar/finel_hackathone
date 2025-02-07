@@ -1,3 +1,5 @@
+import { title } from "process";
+
  const schema = {
     name: 'car',
     type: 'document',
@@ -8,6 +10,17 @@
         type: 'string',
         title: 'Car Name',
       },
+
+      {
+        name: "slug",
+        type: "slug",
+        title: "Slug",
+        options: {
+          source: "name",
+        }
+      },
+
+
       {
         name: 'brand',
         type: 'string',

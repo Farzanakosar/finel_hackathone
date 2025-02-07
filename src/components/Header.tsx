@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import { UserButton } from "@clerk/nextjs";
 
 export default function Header() {
   return (
@@ -57,14 +58,9 @@ export default function Header() {
           />
         </a>
         <a href="#">
-          <Image
-            src="/profile.png"
-            alt="profile"
-            width={44}
-            height={44}
-            className="w-[44px] h-44px rounded-full"
-          />
+        <UserButton />
         </a>
+        
       </div>
     </div>
   );

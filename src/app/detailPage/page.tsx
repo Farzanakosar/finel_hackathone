@@ -19,6 +19,7 @@ export default function page() {
       <div className="first hidden sm:flex w-[25%]">
         <Sidebar />
       </div>
+
       <div className="sec w-full sm:w-[75%] bg-[#f6f7f9] p-4 sm:p-6  flex flex-col gap-10 font-[family-name:var(--font-geist-sans)]">
         <section className=" w-full flex flex-col md:flex-row gap-5  items-center justify-around">
           <div className="first flex flex-col gap-4 w-full  lg:max-w-[470px]  lg:max-h-[508px]">
